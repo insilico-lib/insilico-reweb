@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>insilico : Neuronal Simulation Library</title>
+	<link href="style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>	
+	<div class="wrap">
+	    <table style="border:1px solid lightgrey">
+		<tr class="blue_band">
+		    <td align=center>
+			<p class="logo">
+			    <a href="index.html">insilico</a>
+			</p>
+			<p class="menu">
+			    <a href="docs.html">Documentation</a>
+			</p>
+		    </td>
+		</tr>
+		<tr>
+		    <td>
+			<p class="grey_band">
+			    About
+			</p>
+			<p style="text-align:left">
+			    <span class="logo-inline">insilico</span> is a simulation library for Computational
+			    Neuroscience simulations written in C++ programming
+			    language.
+			</p>
+			<p style="text-align:left">
+			    <span class="logo-inline">insilico</span> encourages ready-to-start approach for
+			    quick setup and development of simulation environment,
+			    without hindering programmers time and focus from
+			    intended experiment. 
+			</p>
+		    </td>
+		</tr>
+		<tr>
+		    <td>
+			<p class="grey_band">
+			    Download
+			</p>
+			<p align=center>
+			    insilico-0.24.zip&nbsp;
+			    <a href="insilico-0.24.zip">				
+				<span style="font-weight:bold;background:black;padding:5px;color:lightgrey;border-radius:5px;">
+				    Download
+				</span>
+			    </a>
+			    &nbsp;View licence
+			</p>
+			<!--
+			<p>
+			the archives
+			</p>
+			-->
+		    </td>
+		</tr>
+		<tr>
+		    <td class="grey_band">
+			Code Sample
+		    </td>
+		</tr>
+		<tr>
+		    <td align=center>
+			<p class="code_blk">
+			    #include "insilico/core.hpp"<br/><br/>
+			    #include <boost/numeric/odeint.hpp><br/><br/>
+			    using namespace insilico;<br/><br/>
+			    int main(int argc, char **argv) {<br/>
+			    configuration::initialize(argc, argv);<br/>
+			    configuration::observe("v");<br/><br/>
+			    engine::generate_neuron<HH_Neuron>(); <br/><br/>
+			    state_type variables = engine::get_variables(); <br/>
+			    integrate_const(boost::numeric::odeint::runge_kutta4<state_type>(),<br/>
+			    engine::driver(), variables,<br/>
+			    0.0, 100.0, 0.05, configuration::observer());<br/><br/>
+			    configuration::finalize();<br/>
+			    }
+			</p>
+			<p class="code_blk">
+			    // HH Neuorn description file<br/>
+			    dxdt : 4, v : -10, m : 0, n : 0, h : 0, I_Ext : 10;
+			</p>
+		    </td>
+		</tr>
+		<tr>
+		    <td class="grey_band">
+			Features
+		    </td>
+		</tr>
+		<tr>
+		    <td>
+			<ul>
+			    <li>Low memory requirements</li>
+			    <li>Highly optimized and performant code</li>
+			    <li>Parallel implementation in MPI available
+				(OpenMP and NVIDIA® CUDA will be supported soon)</li>
+			    <li>Portable across three major platforms (Linux, Mac OS, Windows)</li>
+			    <li>C++11 compatible</li>
+			    <li>Easy to understand and comprehensive API</li>
+			</ul>
+		    </td>
+		</tr>
+		<tr>
+		    <td class="grey_band">
+			News
+		    </td>
+		</tr>
+		<tr>
+		    <td>
+			<p>
+			    28th April, 2015			
+			    <ul>
+				<li>Release of <span class="logo-inline">insilico</span> 0.24!</li>
+				<li><span class="logo-inline">insilico</span> again gets a new website (this).</li>
+			    </ul>
+			</p>
+		    </td>
+		</tr>
+		<tr>
+		    <td align=center>
+			<p class="foot">
+			    Copyright &copy; 2014-2015 Collins Assisi Lab, IISER Pune
+			</p>
+		    </td>
+		</tr>
+	    </table>
+	</div>
+    </body>
+</html>

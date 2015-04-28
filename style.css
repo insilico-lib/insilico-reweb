@@ -1,0 +1,78 @@
+body {
+    background: grey;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+.wrap {
+    width:60%;
+    margin:0px auto;
+    padding:0px;
+    min-width:500px;
+    font-family:Arial;
+}
+table {
+    background: white;
+}
+.logo {
+    font: 17px Monospace;
+    font-weight: bold;
+    color: black;
+    padding-left:10px;
+    float:left;
+}
+.menu a {
+    color: black;
+    padding-right:10px;
+    float:right;
+}
+.menu a:hover {
+    text-decoration: underline;
+}
+.blue_band {
+    background: rgb(135,224,253); /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI5MyUiIHN0b3AtY29sb3I9IiM4N2UwZmQiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI5OSUiIHN0b3AtY29sb3I9IiMwNWFiZTAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  rgba(135,224,253,1) 93%, rgba(5,171,224,1) 99%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(93%,rgba(135,224,253,1)), color-stop(99%,rgba(5,171,224,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(135,224,253,1) 93%,rgba(5,171,224,1) 99%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(135,224,253,1) 93%,rgba(5,171,224,1) 99%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(135,224,253,1) 93%,rgba(5,171,224,1) 99%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(135,224,253,1) 93%,rgba(5,171,224,1) 99%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#05abe0',GradientType=0 ); /* IE6-8 */
+}
+.grey_band {
+    background: rgb(167,199,220); /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI4NyUiIHN0b3AtY29sb3I9IiNhN2M3ZGMiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI5MCUiIHN0b3AtY29sb3I9IiM4NWIyZDMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  rgba(167,199,220,1) 87%, rgba(133,178,211,1) 90%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(87%,rgba(167,199,220,1)), color-stop(90%,rgba(133,178,211,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(167,199,220,1) 87%,rgba(133,178,211,1) 90%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(167,199,220,1) 87%,rgba(133,178,211,1) 90%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(167,199,220,1) 87%,rgba(133,178,211,1) 90%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(167,199,220,1) 87%,rgba(133,178,211,1) 90%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a7c7dc', endColorstr='#85b2d3',GradientType=0 ); /* IE6-8 */
+    padding: 5px;
+    font-weight: bold;
+}
+.foot {
+    padding-top: 2px;
+    border-top: 1px solid grey;
+}
+.logo-inline {
+    font: 17px Monospace;
+}
+.code_blk {
+    color:#000080;
+    border-radius:10px;
+    border:2px solid grey;
+    text-align:left;
+    padding:10px;
+    font-family:Monospace;
+    font-size: 16px;
+}
+.cont {
+    padding-left: 5px;
+    padding-right: 5px;
+}

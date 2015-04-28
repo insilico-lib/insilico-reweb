@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>insilico : Neuronal Simulation Library</title>
+	<link href="style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>	
+	<div class="wrap">
+	    <table style="border:1px solid lightgrey">
+		<tr class="blue_band">
+		    <td align=center>
+			<p class="logo">
+			    <a href="index.html">insilico</a>
+			</p>
+			<p class="menu">
+			    <a href="docs.html">Documentation</a>
+			</p>
+		    </td>
+		</tr>
+		<tr>
+		    <td>
+			<p class="grey_band">
+			    Introduction
+			</p>
+			<p>
+			    <span class="logo-inline">insilico</span> is C++ library for Computational Neuroscience
+			    Simulation. Developed using C++11, a modern language
+			    standard for C++.
+			</p>
+			<p>
+			    <span class="logo-inline">insilico</span> is designed to address and fulfill Computational
+			    Neuroscience Simulation requirement and strives for keeping
+			    simulation writer focused on simulation details, without
+			    getting diverged due to several details of programming
+			    language.
+			</p>
+			<p>
+			    To achieve this library provides an easy-to-use
+			    application programming interface (set of classes and
+			    functions, shortly API)  to model and interact with
+			    biophysical components involved in simulation.
+			</p>
+			<p>
+			    Utmost care has been taken to support simulation writer
+			    write a fine-grained, controlled simulation adhering to
+			    biophysical properties.  
+			</p>
+			<p class="grey_band">
+			    Library Design
+			</p>
+			<p style="text-align:center">
+			    <img src="imgs/insilico-module-design.png" width=80%><br/>
+			    Figure 1. <span class="logo-inline">insilico</span>’s modular design and it’s components
+			</p>
+			<p>
+			    <span class="logo-inline">insilico</span> has been designed and developed in modular fashion.
+			    Every model is extracted out of identified work and roles
+			    to assign to complete that role. Flexibility achieved due
+			    to such modular design allows one to make change in one
+			    component of the library and incur minimum impact on other
+			    component. Figure 1 shows various modules of <span class="logo-inline">insilico</span> and
+			    their independent components.
+			</p>
+			<p>
+			    <i>Implementation Scope and Components</i>
+			</p>
+			<p style="text-align:center">
+			    <img src="imgs/insilico-namespacing.png" width=60%><br/>
+			    Figure 2. Visualization of <span class="logo-inline">insilico</span>’s high level scoping
+			</p>
+			<p>
+			    The implementation of the above design was possible by properly
+			    scoping various components under their respective class of work.
+			</p>
+			<p>
+			    Different scopes and component responsibilities are defined in
+			    <span class="logo-inline">insilico</span>. Let us understand each of them in detail. Please
+			    refer Figure 2 to visualize.
+			</p>
+			<p>
+			    <span class="logo-inline">insilico::configuration</span>
+			</p>
+			<p>
+			    Configuration performs tasks related to efficient file
+			    handling and resource allocation and deallocation. File
+			    handling features such as read input files for simulation,
+			    creating and writing output file for simulation result,
+			    and opening and closing these files in all instances of
+			    successful and unsuccessful simulation completion.
+			</p>
+			<p>
+			    Configuration has it’s own MPI support implementation
+			    under <span class="logo-inline">insilico</span>::configuration::mpi scope. It does a job
+			    of distributing responsibilities among different MPI
+			    processes involved in reading and writing input and
+			    output files respectively.  
+			</p>
+			<p>
+			    <span class="logo-inline">insilico::engine</span>
+			</p>
+			<p>
+			    Engine is a <span class="logo-inline">insilico</span>’s runtime memory management and
+			    data handling unit. It is responsible for serving data
+			    required for simulation at runtime in the desired form.
+			    It has predefined set of API to understand Computational
+			    Neuroscience specific data and their relationships.
+			</p>
+			<p>
+			    Engine also has it’s own MPI support implementation under
+			    <span class="logo-inline">insilico</span>::engine::mpi. It plays a vital role of abstracting
+			    out the synchrony among the MPI processes during critical
+			    operations like data fetch and updates keeping data integrity
+			    and avoid data races.
+			</p>
+			<p>
+			    <span class="logo-inline">insilico::injector</span>
+			</p>
+			<p>
+			    Simulation can sometime pose a need for supply of external
+			    current at different level of requirements. For instance, an
+			    external pulse for few seconds, a constant DC, a spike of
+			    current for microseconds, and so on. All these needs can be
+			    satisfied by the <span class="logo-inline">insilico</span>’s Injector.
+			</p>
+			<p>
+			    <span class="logo-inline">insilico::random</span>
+			</p>
+			<p>
+			    Random is <span class="logo-inline">insilico</span>’s utility class. Provides a feature of
+			    uniform random number generation using C++11 standard library
+			    &lt;random&gt; header.
+			</p>
+			<p>
+			    <span class="logo-inline">insilico::mpi</span>
+			</p>
+			<p>
+			    MPI initialization sets up few constant values throughout
+			    execution of the code along with few common tasks related to
+			    <span class="logo-inline">insilico</span> specific MPI support implementation are covered by
+			    this component scope.
+			</p>
+			<p class="grey_band">
+			    Using <span class="logo-inline">insilico</span>		    
+			</p>
+			<p style="text-align:center">
+			    <img src="imgs/insilico-execution-Flow-chart.png" width=80%><br/>
+			    Figure 3. <span class="logo-inline">insilico</span>’s execution flow chart		    
+			</p>
+			<p class="cont">
+			    The basic usage and execution strategy of <span class="logo-inline">insilico</span> is
+			    shown in figure 3. As the figure depicts, <span class="logo-inline">insilico</span> library
+			    classes and functions can be used by simply including
+			    <span class="logo-inline">insilico</span> as a source and requires
+			</p>
+			<ul>
+			    <li>C++11 compatible compiler</li>
+			    <li>Boost.odeint</li>
+			    <li>OpenMPI</li>
+			</ul>
+			<p class="cont">
+			    C++11 standard library, OpenMP, OpenMPI and Boost.odeint gets
+			    linked to the simulation source to generate simulation
+			    executable. Running the simulation executable accepts runtime
+			    options for input and output files, giving out the simulation
+			    result into a specified output file.
+			</p>
+			<p class="cont">
+			    Figure 4 attempts at demonstrating the internal steps that
+			    simulation takes during “initialization”, “simulation execution”
+			    and “finalization” phases.
+			</p>
+			<p style="text-align:center">
+			    <img src="imgs/insilico-execution-flow.png" width=90%><br/>
+			    Figure 4. <span class="logo-inline">insilico</span>’s execution sequence in detail
+			</p>
+			<p class="cont">
+			    <b><i>Compiling simulation code</i></b>
+			</p>
+			<p class="cont">
+			    <span class="logo-inline">insilico</span> comes bundled with build script for ease of compilation.
+			    Makefile, which is used by make to build a prescribed series of
+			    dependent compilations and linkings, is provided in the home directory
+			    of the project source. Run the following command on terminal to,
+			    where SOURCE should be assigned with your simulation file which
+			    contains main().
+			</p>
+			<p style="text-align:center;font:16px Monospace">
+			    make SOURCE="path/to/source/file.cpp"
+			</p>
+			<p>
+			    <b><i>Executing simulation code</i></b>
+			</p>
+			<p>
+			    Run the following command on terminal to know the expected input
+			    and output file runtime options.
+			</p>
+			<p style="font:16px Monospace">
+			    insilico.out -o &lt;output_file&gt;.csv -n &lt;neuron_file.isf&gt;
+			    -s &lt;synapse_file.isf&gt; -e &lt;external_file.isfc&gt
+			</p>
+			<ul style="font:16px Monospace" type=none>
+			    <li>Options:</li>
+			    <li>-o Output file</li>
+			    <li>-n Neuron configuration file</li>
+			    <li>-s Synapse configuration file (optional)</li>
+			    <li>-e External current configuration file (optional)</li>
+			</ul>
+			<p>
+			    Accordingly provide the files with proper runtime option.
+			</p>
+			<p class="grey_band">
+			    <span class="logo-inline">insilico</span> library file structure
+			</p>
+			<p style="text-align:center">
+			    (a) <img src="imgs/insilico-dir-struct.png">
+			    (b) <img src="imgs/insilico-configuration.png">
+			    (c) <img src="imgs/insilico-engine.png"><br/>
+			    (d) <img src="imgs/insilico-examples.png">
+			    (e) <img src="imgs/insilico-offline-doc.png"><br/>
+			    Figure 5. (a) Library directory structure (b) File structure
+			    inside Configuration directory <br/>(c) File structure in Engine
+			    directory (d) File structure in Examples directory <br/>(e) File
+			    structure under Doc directory
+			</p>
+			<p>
+			    <span class="logo-inline">insilico</span> provides library classes and functions into header
+			    sources, These header sources are all situated under include
+			    directory.
+			</p>
+			<p>
+			    Library is currently divided into five different directories.
+			    Let us understand them in detail with their respective functions:
+			</p>
+			<p> 
+			    <b><i>Core</i></b>
+			</p>
+			<p>		    
+			    Entire simulation support, execution and management functions
+			</p>
+			<p>
+			    <b><i>Biophysical components</i></b>
+			</p>
+			<p>
+			    Libraries collection of established set of neuron, synapse and
+			    current
+			</p>
+			<p>
+			    <b><i>Doc</i></b>
+			</p>
+			<p>
+			    Offline documentation, comes bundled with library source for
+			    reference
+			</p>
+			<p>
+			    <b><i>Examples</i></b>
+			</p>
+			<p>
+			    Collection of neuronal network examples crafted using <span class="logo-inline">insilico</span>
+			</p>
+			<p>
+			    <b><i>Script</i></b>
+			</p>
+			<p>
+			    Utility scripts provided to assist simulation programmer
+			</p>
+			<p>
+			    Figure 5 shows all the directory structures explained here
+			    for visualization.
+			</p>
+			<p class="grey_band">
+			    Memory management and data access mechanism
+			</p>
+			<p>
+			    Neuronal simulation can be a memory and compute intensive
+			    problem. <span class="logo-inline">insilico</span> tries
+			    to solve both these problems efficiently.
+			</p>
+			<p>
+			    Computation intensive nature of problem is majorly due to
+			    integration of ordinary differential equations (ODEs) involved
+			    in the representation of dynamics of neuronal networks.
+			    <span class="logo-inline">insilico</span> uses open source ODE
+			    integration library, Boost.odeint
+			    to efficiently solve problem related to computation, prominently
+			    integration. Boost.odeint has well established itself in space
+			    of ODE solver and has been ported to several language due to its
+			    open source nature. It is properly documented, easy to use,
+			    robust and feature-full.
+			</p>
+			<p>
+			    Now, let us learn about <span class="logo-inline">insilico</span>’s way of solving the memory
+			    problem. <span class="logo-inline">insilico</span>’s memory access and data store is mainly driven
+			    by the requirements of integrator in use.
+			</p>
+			<p>
+			    To generalize, integrator, needs a initial state vector of
+			    variables in ODE and participating in the process of integration,
+			    set of ODEs (rhs) for each of these variables to be integrated
+			    and mechanism to update the variables and parameters after each
+			    step of integration at proper vector locations. The locations
+			    can vary from vector to vector depending on the network size and
+			    amount of detailing and scale of the simulation. So, tracking
+			    this location for each and every variable can be tedious and
+			    non-intuitive.
+			</p>
+			<p>
+			    <span class="logo-inline">insilico</span> tries to solve this my keeping a mapped lookup table
+			    accessible at O(log N) worst case complexity and stored in optimum
+			    way. As shown in figure 6, for every variable or parameter associated
+			    with a neuron or synapse is mapped to a key:value pair, stored
+			    and accessed using C++ inbuilt proven hashing method.
+			</p>
+			<p style="text-align:center">
+			    <img src="imgs/insilico-engine-memory-mapping.jpg" width=80%><br/>
+			    Figure 6. Data access mechanism implemented in <span class="logo-inline">insilico</span>’s
+			    core part demonstrated using an example. Initial state vector
+			    and set of respective ODEs. Lookup table for variable indices.
+			    Lookup for parameter values.		    
+			</p>
+			<p>
+			    This gives <span class="logo-inline">insilico</span> advantages of optimized memory store-access
+			    and pre-determined memory allocation. This also prevents execution
+			    time required for runtime memory re-allocation.
+			</p>
+			<p class="grey_band">
+			    Highlights
+			</p>
+			<ul>
+			    <li>Low memory requirements</li>
+			    <li>Highly optimized and performant code</li>
+			    <li>Parallel implementation in MPI available<br/>
+				(OpenMP and NVIDIA&reg; CUDA will be supported soon)</li>
+			    <li>Portable across three major platforms<br/>
+				(Linux, Mac OS, Windows)</li>
+			    <li>C++11 compatible</li>
+			    <li>Easy to understand and comprehensive API</li>
+			</ul>
+			<p class="grey_band">
+			    Specification for input files
+			</p>
+			<p>
+			    <b><i><span class="logo-inline">insilico</span> Simulation
+				Specification File format (ISF)</i></b>
+			</p>
+			<p>
+			    Primary usage of this input file is in specification of Neuron
+			    and Synapse input. Line ending with a semi-colon represents a
+			    single Neuron or Synapse. Synapse input file is optional argument
+			    if there is no synapse in the simulation.
+			</p>
+			<p>	 
+			    Both the above parameter files has their specification as comma
+			    separated key:value pairs in the following format on each line in the file.
+			</p>
+			<table align=center style="border:1px solid black">
+			    <tr>
+				<td>dxdt:&lt;ODE-vars&gt; ,</td>
+				<td>&lt;var1&gt;:&lt;init&gt; ,</td>
+				<td>&lt;var2&gt;:&lt;init&gt; ,</td>
+				<td> ..., </td>
+				<td>&lt;varN&gt;:&lt;init&gt</td>
+				<td>;</td>
+			    </tr>
+			</table>
+			<p>
+			    dxdt:&lt;ODE-vars&gt;
+			</p>
+			<p>
+			    denotes the count of ODE variables, all the variables for ODEs in
+			    the simulation code should satisfy their count and the value replacing
+			    &lt;ODE-vars&gt; and those many variables should follow immediately
+			    after ('dxdt' is a library keyword, &lt;ODE-vars&gt; should be replaced
+			    by positive integer)
+			</p>
+			<p>
+			    &lt;var1&gt;:&lt;init&gt; to &lt;varN&gt;:&lt;init&gt;
+			</p>
+			<p>
+			    variables to be used in simulation with initial values (&lt;var1&gt;
+			    to &lt;varN&gt; should be replaced by desired variable name and
+			    &lt;init&gt; should be replaced by initial values of the respective
+			    variables), in the case of Synapse file variables 'pre' and 'post' are
+			    mandatory with presynaptic and postsynaptic neuron indices as their
+			    values respectively
+			</p>
+			<p>
+			    <b><i><span class="logo-inline">insilico</span> Simulation Specification
+			    File format for Currents (ISFC)</i></b>
+			</p>
+			<p>
+			    Primary usage of this input file is in specification of External
+			    current input to be injected into Neurons or their compartment.
+			    This input file is optional.
+			</p>
+			<p>
+			    Use the following <span class="logo-inline">insilico</span> Simulation File format for current (isfc).
+			</p>
+			<table align=center style="border:1px solid black">
+			    <tr>
+				<td>time ,</td><td>neuron-id-1 ,</td><td>neuron-id-2 ,</td>
+				<td>...,</td><td>neuron-id-n</td>
+			    </tr>
+			    <tr>
+				<td>tstart ,</td><td>cur-val-1 ,</td><td>cur-val-2 ,</td>
+				<td>...,</td><td>cur-val-n</td>
+			    </tr>
+			    <tr>
+				<td>+tstep ,</td><td>...,</td><td>...,</td><td>...,</td><td>...</td>
+			    </tr>
+			    <tr>
+				<td>...,</td><td>...,</td><td>...,</td><td>...,</td><td>...</td>
+			    </tr>
+			    <tr>
+				<td>tend ,</td><td>cur-val-1m ,</td><td>cur-val-2m ,</td>
+				<td>...,</td><td>cur-val-nm</td>
+			    </tr>
+			</table>
+			<p>
+			    time
+			</p>
+			<p>
+			    String to signify the header of the input file
+			</p>
+			<p>
+			    neuron-id-1 to neuron-id-n
+			</p>
+			<p>
+			    List of Neuron IDs (simulator specific ids, which are read from Neuron
+			    file and starts from 0). A given ID can be repeated to denote the different
+			    compartment of the same neuron. And this should be handled by programmer.
+			</p>
+			<p>
+			    tstart, +tstep and tend
+			</p>
+			<p>
+			    Increasing time of simulation run. Simulation starts at 'tstart', with
+			    increments of 'tstep' and ends at 'tend'.
+			</p>
+			<p>
+			    cur-val-1 to cur-val-n, cur-val-1m to cur-val-nm
+			</p>
+			<p>
+			    External current for a specific neuron in its column for all neurons
+			    available in header and for all time steps from 'tstart' to 'tend'.
+			</p>
+			<p>
+			    <b><i>Specification for output file</i></b>
+			</p>
+			<p>
+			    Simulation results will be written to this file as comma separated values (CSV)
+			    in following format for each line of output.
+			</p>		
+			<table align=center style="border:1px solid black">
+			    <tr>   
+				<td>time-step ,</td>
+				<td>variable-1 ,</td>
+				<td>variable-2 ,</td>
+				<td>variable-3 ,</td>
+				<td> ..., </td>
+				<td>variable-n</td>
+			    </tr>
+			</table>
+			<p>
+			    time-step
+			</p>
+			<p>
+			    current time-step
+			</p>
+			<p>
+			    variable-1 to variable-n
+			</p>
+			<p>
+			    all the variable values that are provided to <span class="logo-inline">insilico</span>’s observer
+			</p>
+			<p class="grey_band">
+			    Code Examples
+			</p>
+			<p>
+			    Example 1: Current due to Sodium ion (Na+) channel
+			</p>
+			<p>
+			    Following code demonstrates the computation of current flowing
+			    through Na+ channel as given by Hodgkin-Huxley Neuron model.
+			    It has it’s own ODE for gating variables ‘m’ and ‘h’, computation
+			    and storage of current value during the given integration step.
+			</p>
+			<p class="code_blk">
+			    class I_Na {        // Na+ current class <br/><br/>
+			    private:<br/>
+			    double gna = 120;   // Na+ Conductance<br/>
+			    double ena = 115;   // Na+ resting potential<br/><br/>
+			    public:<br/>
+			    // Compute Na+ current for time ‘t’ and neuron ID ‘id’<br/>
+			    void current(state_type& variables, state_type& dxdt,<br/>
+			    const double t, const unsigned id) {<br/>
+			    int v_index = engine::neuron_index(id, "v");<br/>
+			    int m_index = engine::neuron_index(id, "m");<br/>
+			    int h_index = engine::neuron_index(id, "h");<br/><br/>
+			    double v = variables[v_index]; // Membrane Potential ‘v’ for neuron ID ‘id’<br/>
+			    double m = variables[m_index]; // Activation probability variable ‘m’<br/>
+			    double h = variables[h_index]; // Inactivation probability variable ‘h’<br/><br/>
+			    // Voltage dependent rates<br/>
+			    // (Alpha_m, Beta_m, Alpha_h, Beta_h)<br/>
+			    // for transition between closed and open state<br/>
+			    double alpha_m = (2.5 - 0.1 * v) / (exp(2.5-0.1 * v) - 1.0);<br/>
+			    double beta_m  = 4.0 * exp(-v / 18.0);<br/>
+			    double alpha_h = 0.07 * exp(-v / 20.0);<br/>
+			    double beta_h  = 1.0 / (exp(3 - 0.1 * v) + 1);<br/><br/>
+			    // Ordinary differential equation for ‘m’ and ‘h’<br/>
+			    dxdt[m_index] = (alpha_m * (1-m) - beta_m * m);<br/>
+			    dxdt[h_index] = (alpha_h * (1-h) - beta_h * h);<br/><br/>
+			    // Store the value of current into global identifier<br/>
+			    engine::neuron_value(id, "I_Na", (gna * pow(m, 3) * h * (v - ena)));<br/>
+			    }<br/>
+			    };
+			</p>
+			<p style="text-align:center">
+			    Figure 7. INa current using <span class="logo-inline">insilico</span>
+			</p>
+			<p>
+			    Example 2: Hodgkin-Huxley Neuron model
+			</p>
+			<p>
+			    Following code demonstrates HH Neuron and its interaction with component
+			    Na+, K+ and Leak channels. K+ and Leak channels can be written similar to
+			    the example code given for Na+ channel above.
+			</p>
+			<p class="code_blk">
+			    class HH_Neuron : public Neuron {   // Hodgkin-Huxley neuron<br/><br/>
+			    private:<br/>
+			    I_Na   i_na_component; // Na+ channel<br/>
+			    I_K    i_k_component; // K+ channel<br/>
+			    I_Leak i_leak_component; // Leak channel<br/><br/>
+			    public:<br/>
+			    // ODEs for a Neuron ID ‘id’<br/>
+			    void ode_set(state_type& variables, state_type& dxdt, <br/>
+			    const double t, const unsigned id) {<br/>
+			    i_na_component.current(variables, dxdt, t, id);        // Compute I_Na<br/>
+			    i_k_component.current(variables, dxdt, t, id);         // Compute I_K<br/>
+			    i_leak_component.current(variables, dxdt, t, id);      // Compute I_Leak<br/><br/>
+			    double I_Na = engine::neuron_value(id, "I_Na");        // Fetch I_Na<br/>
+			    double I_K = engine::neuron_value(id, "I_K");          // Fetch I_K<br/>
+			    double I_Leak = engine::neuron_value(id, "I_Leak");    // Fetch I_Leak<br/><br/>
+			    // Fetch the constant DC current applied externally, from file<br/>
+			    double I_Ext = engine::neuron_value(id, "I_Ext");<br/><br/>
+			    // Get index for membrane potential variable ‘v’ for neuron ID ‘id’<br/>
+			    int v_index = engine::neuron_index(id, "v");<br/><br/>
+			    // Ordinary differential equation for ‘v’<br/>
+			    dxdt[v_index] = - I_Na - I_K - I_Leak + I_Ext;<br/>
+			    }<br/>
+			    };
+			</p>
+			<p style="text-align:center">
+			    Figure 8. Hodgkin-Huxley neuron using <span class="logo-inline">insilico</span>
+			</p>
+		    </td>
+		</tr>
+		<tr>
+		    <td align=center>
+			<p class="foot">
+			    Copyright &copy; 2014-2015 Collins Assisi Lab, IISER, Pune
+			</p>
+		    </td>
+		</tr>
+	    </table>
+	</div>
+    </body>
+</html>
