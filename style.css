@@ -19,16 +19,29 @@ table {
     font: 17px Monospace;
     font-weight: bold;
     color: black;
-    padding-left:10px;
+    padding:10px;
     float:left;
+}
+.menu-active a {
+    color: white;
+    background:black;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding:10px;
+    float:right;
+    margin-right: 10px;
 }
 .menu a {
     color: black;
-    padding-right:10px;
+    padding:10px;
     float:right;
+    margin-right: 10px;
 }
 .menu a:hover {
-    text-decoration: underline;
+    color: white;
+    background:black;
+    border-radius: 5px;
+    margin-right: 10px;
 }
 .blue_band {
     background: rgb(135,224,253); /* Old browsers */
@@ -57,6 +70,7 @@ table {
     font-weight: bold;
 }
 .foot {
+    font-size: 12px;
     padding-top: 2px;
     border-top: 1px solid grey;
 }

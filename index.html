@@ -8,12 +8,18 @@
 	<div class="wrap">
 	    <table style="border:1px solid lightgrey">
 		<tr class="blue_band">
-		    <td align=center>
+		    <td align=center style="padding-right:10px">
 			<p class="logo">
 			    <a href="index.html">insilico</a>
 			</p>
 			<p class="menu">
+			    <a href="https://github.com/pranavcode/insilico">Github</a>
+			</p>			
+			<p class="menu">
 			    <a href="docs.html">Documentation</a>
+			</p>
+			<p class="menu-active">
+			    <a href="index.html">Home</a>
 			</p>
 		    </td>
 		</tr>
@@ -36,52 +42,60 @@
 		    </td>
 		</tr>
 		<tr>
-		    <td>
-			<p class="grey_band">
-			    Download
-			</p>
-			<p align=center>
-			    insilico-0.24.zip&nbsp;
-			    <a href="insilico-0.24.zip">				
-				<span style="font-weight:bold;background:black;padding:5px;color:lightgrey;border-radius:5px;">
-				    Download
-				</span>
-			    </a>
-			    &nbsp;View licence
-			</p>
-			<!--
-			<p>
-			the archives
-			</p>
-			-->
-		    </td>
-		</tr>
-		<tr>
 		    <td class="grey_band">
 			Code Sample
 		    </td>
 		</tr>
-		<tr>
-		    <td align=center>
+		<tr>		    
+		    <td>
+			<p>
+			    Simulating Hodgkin-Huxley Neuron model
+			</p>
 			<p class="code_blk">
 			    #include "insilico/core.hpp"<br/><br/>
-			    #include <boost/numeric/odeint.hpp><br/><br/>
+			    #include &lt;boost/numeric/odeint.hpp&gt;<br/><br/>
 			    using namespace insilico;<br/><br/>
 			    int main(int argc, char **argv) {<br/>
-			    configuration::initialize(argc, argv);<br/>
-			    configuration::observe("v");<br/><br/>
-			    engine::generate_neuron<HH_Neuron>(); <br/><br/>
-			    state_type variables = engine::get_variables(); <br/>
-			    integrate_const(boost::numeric::odeint::runge_kutta4<state_type>(),<br/>
-			    engine::driver(), variables,<br/>
-			    0.0, 100.0, 0.05, configuration::observer());<br/><br/>
-			    configuration::finalize();<br/>
+			    &nbsp;&nbsp;configuration::initialize(argc, argv);<br/>
+			    &nbsp;&nbsp;configuration::observe("v");<br/><br/>
+			    &nbsp;&nbsp;engine::generate_neuron&lt;HH_Neuron&gt;(); <br/><br/>
+			    &nbsp;&nbsp;state_type variables = engine::get_variables(); <br/>
+			    &nbsp;&nbsp;integrate_const(boost::numeric::odeint::runge_kutta4&lt;state_type&gt;(),<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;engine::driver(), variables,<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.0, 100.0, 0.05, configuration::observer());<br/><br/>
+			    &nbsp;&nbsp;configuration::finalize();<br/>
 			    }
 			</p>
-			<p class="code_blk">
-			    // HH Neuorn description file<br/>
-			    dxdt : 4, v : -10, m : 0, n : 0, h : 0, I_Ext : 10;
+		    </td>
+		</tr>
+		<tr>
+		    <td>
+			<p class="grey_band">
+			    Download
 			</p>
+			<p>
+			    <i>Current version: <b>0.24</b></i>
+			</p>
+			<p>
+			    
+			</p>
+			<p align=center>
+			    Download compressed source<br/>
+			</p>
+			<p align=center>
+			    <a href="insilico-0.24.zip">				
+				<span style="font-weight:bold;background:black;padding:5px;color:lightgrey;border-radius:5px;">
+				    insilico-0.24.zip
+				</span>
+			    </a>
+			</p>			
+			<p>
+			    <a href="https://github.com/pranavcode/insilico/releases">
+				<i>Link to archive</i>
+			    </a>
+			</p>		
 		    </td>
 		</tr>
 		<tr>
@@ -98,7 +112,7 @@
 				(OpenMP and NVIDIA® CUDA will be supported soon)</li>
 			    <li>Portable across three major platforms (Linux, Mac OS, Windows)</li>
 			    <li>C++11 compatible</li>
-			    <li>Easy to understand and comprehensive API</li>
+			    <li>Easy to understand API</li>
 			</ul>
 		    </td>
 		</tr>
@@ -110,10 +124,9 @@
 		<tr>
 		    <td>
 			<p>
-			    28th April, 2015			
+			    29th April, 2015			
 			    <ul>
-				<li>Release of <span class="logo-inline">insilico</span> 0.24!</li>
-				<li><span class="logo-inline">insilico</span> again gets a new website (this).</li>
+				<li>Announcing the release of <span class="logo-inline">insilico</span> 0.24!</li>
 			    </ul>
 			</p>
 		    </td>
@@ -121,7 +134,7 @@
 		<tr>
 		    <td align=center>
 			<p class="foot">
-			    Copyright &copy; 2014-2015 Collins Assisi Lab, IISER Pune
+			    Copyright &copy; 2014-2015 Collins Assisi Lab, IISER, Pune. All Rights Reserved. (Last Updated: 29th April, 2015)
 			</p>
 		    </td>
 		</tr>

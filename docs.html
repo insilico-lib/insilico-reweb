@@ -8,12 +8,18 @@
 	<div class="wrap">
 	    <table style="border:1px solid lightgrey">
 		<tr class="blue_band">
-		    <td align=center>
+		    <td align=center style="padding-right:10px">
 			<p class="logo">
 			    <a href="index.html">insilico</a>
 			</p>
 			<p class="menu">
+			    <a href="https://github.com/pranavcode/insilico">Github</a>
+			</p>			
+			<p class="menu-active">
 			    <a href="docs.html">Documentation</a>
+			</p>
+			<p class="menu">
+			    <a href="index.html">Home</a>
 			</p>
 		    </td>
 		</tr>
@@ -311,10 +317,10 @@
 			    and accessed using C++ inbuilt proven hashing method.
 			</p>
 			<p style="text-align:center">
-			    <img src="imgs/insilico-engine-memory-mapping.jpg" width=80%><br/>
+			    <img src="imgs/insilico-engine-memory-mapping.jpg" width=50% style="border:2px solid grey;"><br/>
 			    Figure 6. Data access mechanism implemented in <span class="logo-inline">insilico</span>’s
-			    core part demonstrated using an example. Initial state vector
-			    and set of respective ODEs. Lookup table for variable indices.
+			    core part <br/>demonstrated using an example. Initial state vector
+			    and set of respective ODEs. <br/>Lookup table for variable indices.
 			    Lookup for parameter values.		    
 			</p>
 			<p>
@@ -443,8 +449,8 @@
 			    External current for a specific neuron in its column for all neurons
 			    available in header and for all time steps from 'tstart' to 'tend'.
 			</p>
-			<p>
-			    <b><i>Specification for output file</i></b>
+			<p class="grey_band">
+			    Specification for output file
 			</p>
 			<p>
 			    Simulation results will be written to this file as comma separated values (CSV)
@@ -485,37 +491,39 @@
 			    and storage of current value during the given integration step.
 			</p>
 			<p class="code_blk">
-			    class I_Na {        // Na+ current class <br/><br/>
+			    // Na+ current class<br/>
+			    class I_Na {         <br/><br/>
 			    private:<br/>
-			    double gna = 120;   // Na+ Conductance<br/>
-			    double ena = 115;   // Na+ resting potential<br/><br/>
+			    &nbsp;&nbsp;double gna = 120;   // Na+ Conductance<br/>
+			    &nbsp;&nbsp;double ena = 115;   // Na+ resting potential<br/><br/>
 			    public:<br/>
-			    // Compute Na+ current for time ‘t’ and neuron ID ‘id’<br/>
-			    void current(state_type& variables, state_type& dxdt,<br/>
-			    const double t, const unsigned id) {<br/>
-			    int v_index = engine::neuron_index(id, "v");<br/>
-			    int m_index = engine::neuron_index(id, "m");<br/>
-			    int h_index = engine::neuron_index(id, "h");<br/><br/>
-			    double v = variables[v_index]; // Membrane Potential ‘v’ for neuron ID ‘id’<br/>
-			    double m = variables[m_index]; // Activation probability variable ‘m’<br/>
-			    double h = variables[h_index]; // Inactivation probability variable ‘h’<br/><br/>
-			    // Voltage dependent rates<br/>
-			    // (Alpha_m, Beta_m, Alpha_h, Beta_h)<br/>
-			    // for transition between closed and open state<br/>
-			    double alpha_m = (2.5 - 0.1 * v) / (exp(2.5-0.1 * v) - 1.0);<br/>
-			    double beta_m  = 4.0 * exp(-v / 18.0);<br/>
-			    double alpha_h = 0.07 * exp(-v / 20.0);<br/>
-			    double beta_h  = 1.0 / (exp(3 - 0.1 * v) + 1);<br/><br/>
-			    // Ordinary differential equation for ‘m’ and ‘h’<br/>
-			    dxdt[m_index] = (alpha_m * (1-m) - beta_m * m);<br/>
-			    dxdt[h_index] = (alpha_h * (1-h) - beta_h * h);<br/><br/>
-			    // Store the value of current into global identifier<br/>
-			    engine::neuron_value(id, "I_Na", (gna * pow(m, 3) * h * (v - ena)));<br/>
-			    }<br/>
+			    &nbsp;&nbsp;// Compute Na+ current for time ‘t’ and neuron ID ‘id’<br/>
+			    &nbsp;&nbsp;void current(state_type& variables, state_type& dxdt,<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    &nbsp;&nbsp;&nbsp;&nbsp;const double t, const unsigned id) {<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;int v_index = engine::neuron_index(id, "v");<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;int m_index = engine::neuron_index(id, "m");<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;int h_index = engine::neuron_index(id, "h");<br/><br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;double v = variables[v_index]; // Membrane Potential ‘v’ for neuron ID ‘id’<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;double m = variables[m_index]; // Activation probability variable ‘m’<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;double h = variables[h_index]; // Inactivation probability variable ‘h’<br/><br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;// Voltage dependent rates<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;// (Alpha_m, Beta_m, Alpha_h, Beta_h)<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;// for transition between closed and open state<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;double alpha_m = (2.5 - 0.1 * v) / (exp(2.5-0.1 * v) - 1.0);<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;double beta_m  = 4.0 * exp(-v / 18.0);<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;double alpha_h = 0.07 * exp(-v / 20.0);<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;double beta_h  = 1.0 / (exp(3 - 0.1 * v) + 1);<br/><br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;// Ordinary differential equation for ‘m’ and ‘h’<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;dxdt[m_index] = (alpha_m * (1-m) - beta_m * m);<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;dxdt[h_index] = (alpha_h * (1-h) - beta_h * h);<br/><br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;// Store the value of current into global identifier<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;engine::neuron_value(id, "I_Na", (gna * pow(m, 3) * h * (v - ena)));<br/>
+			    &nbsp;&nbsp;}<br/>
 			    };
 			</p>
 			<p style="text-align:center">
-			    Figure 7. INa current using <span class="logo-inline">insilico</span>
+			    Figure 7. I<sub>Na</sub> current using <span class="logo-inline">insilico</span>
 			</p>
 			<p>
 			    Example 2: Hodgkin-Huxley Neuron model
@@ -526,28 +534,30 @@
 			    the example code given for Na+ channel above.
 			</p>
 			<p class="code_blk">
-			    class HH_Neuron : public Neuron {   // Hodgkin-Huxley neuron<br/><br/>
+			    // Hodgkin-Huxley Neuron<br/>
+			    class HH_Neuron : public Neuron {   <br/><br/>
 			    private:<br/>
-			    I_Na   i_na_component; // Na+ channel<br/>
-			    I_K    i_k_component; // K+ channel<br/>
-			    I_Leak i_leak_component; // Leak channel<br/><br/>
+			    &nbsp;&nbsp;I_Na   i_na_component;   // Na+ channel<br/>
+			    &nbsp;&nbsp;I_K    i_k_component;    // K+ channel<br/>
+			    &nbsp;&nbsp;I_Leak i_leak_component; // Leak channel<br/><br/>
 			    public:<br/>
-			    // ODEs for a Neuron ID ‘id’<br/>
-			    void ode_set(state_type& variables, state_type& dxdt, <br/>
-			    const double t, const unsigned id) {<br/>
-			    i_na_component.current(variables, dxdt, t, id);        // Compute I_Na<br/>
-			    i_k_component.current(variables, dxdt, t, id);         // Compute I_K<br/>
-			    i_leak_component.current(variables, dxdt, t, id);      // Compute I_Leak<br/><br/>
-			    double I_Na = engine::neuron_value(id, "I_Na");        // Fetch I_Na<br/>
-			    double I_K = engine::neuron_value(id, "I_K");          // Fetch I_K<br/>
-			    double I_Leak = engine::neuron_value(id, "I_Leak");    // Fetch I_Leak<br/><br/>
-			    // Fetch the constant DC current applied externally, from file<br/>
-			    double I_Ext = engine::neuron_value(id, "I_Ext");<br/><br/>
-			    // Get index for membrane potential variable ‘v’ for neuron ID ‘id’<br/>
-			    int v_index = engine::neuron_index(id, "v");<br/><br/>
-			    // Ordinary differential equation for ‘v’<br/>
-			    dxdt[v_index] = - I_Na - I_K - I_Leak + I_Ext;<br/>
-			    }<br/>
+			    &nbsp;&nbsp;// ODEs for a Neuron ID ‘id’<br/>
+			    &nbsp;&nbsp;void ode_set(state_type& variables, state_type& dxdt, <br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    &nbsp;&nbsp;&nbsp;&nbsp;const double t, const unsigned id) {<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;i_na_component.current(variables, dxdt, t, id); // Compute I_Na<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;i_k_component.current(variables, dxdt, t, id);         // Compute I_K<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;i_leak_component.current(variables, dxdt, t, id);      // Compute I_Leak<br/><br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;double I_Na = engine::neuron_value(id, "I_Na");        // Fetch I_Na<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;double I_K = engine::neuron_value(id, "I_K");          // Fetch I_K<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;double I_Leak = engine::neuron_value(id, "I_Leak");    // Fetch I_Leak<br/><br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;// Fetch the constant DC current applied externally, from file<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;double I_Ext = engine::neuron_value(id, "I_Ext");<br/><br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;// Get index for membrane potential variable ‘v’ for neuron ID ‘id’<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;int v_index = engine::neuron_index(id, "v");<br/><br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;// Ordinary differential equation for ‘v’<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;dxdt[v_index] = - I_Na - I_K - I_Leak + I_Ext;<br/>
+			    &nbsp;&nbsp;}<br/>
 			    };
 			</p>
 			<p style="text-align:center">
@@ -558,7 +568,7 @@
 		<tr>
 		    <td align=center>
 			<p class="foot">
-			    Copyright &copy; 2014-2015 Collins Assisi Lab, IISER, Pune
+			    Copyright &copy; 2014-2015 Collins Assisi Lab, IISER, Pune. All Rights Reserved. (Last Updated: 29th April, 2015)
 			</p>
 		    </td>
 		</tr>
