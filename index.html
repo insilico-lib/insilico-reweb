@@ -13,6 +13,9 @@
 			    <a href="index.html">insilico</a>
 			</p>
 			<p class="menu">
+			    <a href="https://groups.google.com/d/forum/insilico">Forum</a>
+			</p>
+			<p class="menu">
 			    <a href="https://github.com/pranavcode/insilico">Github</a>
 			</p>			
 			<p class="menu">
@@ -76,13 +79,66 @@
 			    Download
 			</p>
 			<p>
-			    <i>Current version: <b>0.24</b></i>
+			    <b>Announcing <span class="logo-inline">insilico</span> 0.24</b>
 			</p>
 			<p>
-			    
+			    insilico 0.24 is now available. This is a major release for improvements in
+			    command-line interface, observer and runtime error handling. This release
+			    also includes several minor bug fixes.
+			</p>
+			<p>
+			    <b><i>New Features</i></b>
+			</p>
+			<ul>
+			   <li> Observer can observe model parameters and runtime variables if available in input file<br/>
+			    e.g. I_Syn, I_Na</li>
+			    <li>Get variable name from its index (location) in global vector using Engine API as given below<br/>
+			    std::string insilico::engine::variable_name_from_index(const unsigned index)</li>
+			</ul>
+			<p>
+			    <b><i>Enhancements</i></b>
+			</p>
+			<ul>
+			    <li>Headers are part of include/insilico</li>
+			    <li>Observer supports custom delimiter<br/>
+			    void configuration::observe_delimiter(const char)</li>
+			    <li>Headers for observer can be disabled<br/>
+			    void configuration::observe_header(const bool)
+			    <li>Value and Index functions does handles exceptions due to failures better than before</li>
+			    <li>Command-line interface allows space between options to help tab completion</li>
+			    <li>Example code demonstrate object-oriented insilico (SingleNeuron_HH1952 as of now)</li>
+			    <li>Use of const in non-variable contexts</li>
+			    <li>Warnings from GCC and clang are resolved by making code interoperable</li>
+			</ul>
+			<p>
+			    <b><i>Deprecation</i></b>
+			</p>
+			<ul>
+			    <li>insilico::engine::current_value() function are deprecated (read removed)</li>
+			</ul>
+			<p>
+			    <b><i>Bug Fixes</i></b>
+			</p>
+			<ul>
+			    <li>Comments support in input files improved (neuron and synapse input files only)</li>
+			    <li>Malfunction in Injector is resolved</li>
+			    <li>DefaultSynapse uses spike history</li>
+			    <li>Erroneous exceptions are resolved and will not occur again<li>
+			</ul>
+			<p>
+			    <b><i>Moving from older version to this version</i></b>
+			</p>
+			<ul>
+			    <li>Prefix include statements with 'insilico/' directory<br/>
+				e.g. #include “insilico/core.hpp"</li>
+			    <li>Change current_value functions into neuron_value/synapse_value 
+				depending on their contextual usage<br/>
+				grep -lar "current_value" . | grep cpp | xargs -IN sed -i '' s/current_value/neuron_value/g N<br/>
+				grep -lar "current_value" . | grep hpp | xargs -IN sed -i '' s/current_value/neuron_value/g N<br/></li>
+			</ul>
 			</p>
 			<p align=center>
-			    Download compressed source<br/>
+			    <i>Download compressed source</i>
 			</p>
 			<p align=center>
 			    <a href="insilico-0.24.zip">				
@@ -93,7 +149,7 @@
 			</p>			
 			<p>
 			    <a href="https://github.com/pranavcode/insilico/releases">
-				<i>Link to archive</i>
+				<u>Link to archive</u>
 			    </a>
 			</p>		
 		    </td>
@@ -126,7 +182,8 @@
 			<p>
 			    29th April, 2015			
 			    <ul>
-				<li>Announcing the release of <span class="logo-inline">insilico</span> 0.24!</li>
+				<li><span class="logo-inline">insilico</span> 0.24 released!</li>
+				<li>New and improved web design for <span class="logo-inline">insilico</span></li>
 			    </ul>
 			</p>
 		    </td>
