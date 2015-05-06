@@ -79,74 +79,72 @@
 			    Download
 			</p>
 			<p>
-			    <b>Announcing <span class="logo-inline">insilico</span> 0.24</b>
+			    <b>Announcing <span class="logo-inline">insilico</span> 0.25</b>
 			</p>
 			<p>
-			    insilico 0.24 is now available. This is a major release for improvements in
-			    command-line interface, observer and runtime error handling. This release
-			    also includes several minor bug fixes.
+			    <span class="logo-inline">insilico</span> 0.25 is now available.
+			    This is a minor release with new feature
+			    and improved efficiency along with some bug fixes.
 			</p>
 			<p>
 			    <b><i>New Features</i></b>
 			</p>
 			<ul>
-			   <li> Observer can observe model parameters and runtime variables if available in input file<br/>
-			    e.g. I_Syn, I_Na</li>
-			    <li>Get variable name from its index (location) in global vector using Engine API as given below<br/>
-			    std::string insilico::engine::variable_name_from_index(const unsigned index)</li>
+			    <li>Dynamic parameters
+				<ul>
+				    <li><span class="logo-inline">insilico</span> was missing time dependent parameters as input.</li>
+				    <li>The way it was handled previously by simulation programmer, was by manipulating
+					parameter values inside the code with time comparison. To ease this efforts by
+					providing it as external file during execution this feature is introduced in this version.</li>
+				    <li>Use <code>-d</code> as option to supply this file.</li>				    
+				    <li>For using this feature, include <code>“insilico/core/dynamic_params.hpp”</code>.</li>
+				    <li>Function for using this dynamic params from input file has following declaration<br/>
+					<code>double dynamic_params::value(const std::string& param_name, const double time);</code><br/>
+					This function returns double value for parameter <code>param_name</code> at time <code>time</code>.
+				    </li>
+				</ul>
+			    </li>
 			</ul>
 			<p>
 			    <b><i>Enhancements</i></b>
 			</p>
 			<ul>
-			    <li>Headers are part of include/insilico</li>
-			    <li>Observer supports custom delimiter<br/>
-			    void configuration::observe_delimiter(const char)</li>
-			    <li>Headers for observer can be disabled<br/>
-			    void configuration::observe_header(const bool)
-			    <li>Value and Index functions does handles exceptions due to failures better than before</li>
-			    <li>Command-line interface allows space between options to help tab completion</li>
-			    <li>Example code demonstrate object-oriented insilico (SingleNeuron_HH1952 as of now)</li>
-			    <li>Use of const in non-variable contexts</li>
-			    <li>Warnings from GCC and clang are resolved by making code interoperable</li>
-			</ul>
-			<p>
-			    <b><i>Deprecation</i></b>
-			</p>
-			<ul>
-			    <li>insilico::engine::current_value() function are deprecated (read removed)</li>
+			    <li>
+				Efficiency pack - these functions are more efficient now
+				<ul>
+				    <code>
+				    <li>injector</li>
+				    <li>neuron_id_from_index</li>
+				    <li>synapse_id_from_index</li>
+				    <li>variable_name_from_index</li>
+				    </code>
+				</ul>
+			    </li>
+			    <li>
+				New example <code>SingleNeuron_HH1952_Stochastic</code> added to demonstrate stochastic integration possibility
+			    </li>
 			</ul>
 			<p>
 			    <b><i>Bug Fixes</i></b>
 			</p>
 			<ul>
-			    <li>Comments support in input files improved (neuron and synapse input files only)</li>
-			    <li>Malfunction in Injector is resolved</li>
-			    <li>DefaultSynapse uses spike history</li>
-			    <li>Erroneous exceptions are resolved and will not occur again</li>
+			    <li>
+				<code>neuron_id_from_index</code> and <code>synapse_id_from_index</code> computes correct IDs
+			    </li>
+			    <li>
+				Observer header is proper, even if parameters and variables are observed out-of-order
+			    </li>
 			</ul>
-			<p>
-			    <b><i>Moving from older version to this version</i></b>
-			</p>
-			<ul>
-			    <li>Prefix include statements with 'insilico/' directory<br/>
-				e.g. #include “insilico/core.hpp"</li>
-			    <li>Change current_value functions into neuron_value/synapse_value 
-				depending on their contextual usage<br/>
-				grep -lar "current_value" . | grep cpp | xargs -IN sed -i '' s/current_value/neuron_value/g N<br/>
-				grep -lar "current_value" . | grep hpp | xargs -IN sed -i '' s/current_value/neuron_value/g N<br/></li>
-			</ul>
-			</p>
 			<p align=center>
 			    <i>Download compressed source</i>
 			</p>
 			<p align=center>
-			    <a href="insilico-0.24.zip">				
+			    <a href="insilico-0.25.zip">				
 				<span style="font-weight:bold;background:black;padding:5px;color:lightgrey;border-radius:5px;">
-				    insilico-0.24.zip
+				    insilico-0.25.zip
 				</span>
 			    </a>
-			</p>			
+			</p>
 			<p>
 			    <a href="https://github.com/pranavcode/insilico/releases">
 				<u>Link to archive</u>
@@ -162,12 +160,15 @@
 		<tr>
 		    <td>
 			<ul>
+			    <li>Open Source</li>
 			    <li>Low memory requirements</li>
-			    <li>Highly optimized and performant code</li>
+			    <li>Flexible</li>
+			    <li>Transparent implementation</li>
+			    <li>Highly optimized and efficient code</li>
+			    <li>C++11 compatible</li>
 			    <li>Parallel implementation in MPI available
 				(OpenMP and NVIDIA® CUDA will be supported soon)</li>
 			    <li>Portable across three major platforms (Linux, Mac OS, Windows)</li>
-			    <li>C++11 compatible</li>
 			    <li>Easy to understand API</li>
 			</ul>
 		    </td>
@@ -175,6 +176,17 @@
 		<tr>
 		    <td class="grey_band">
 			News
+		    </td>
+		</tr>
+		<tr>
+		    <td>
+			<p>
+			    6th May, 2015			
+			    <ul>
+				<li><span class="logo-inline">insilico</span> 0.25 released!</li>
+				<li>First version of Documentation made available on website</li>
+			    </ul>
+			</p>
 		    </td>
 		</tr>
 		<tr>
